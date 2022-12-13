@@ -32,14 +32,17 @@
   </template>
 
 <script>
+import request from '@/utils/request'
+// 安装并引入 qs
+import qs from 'qs'
 export default {
   name: 'LoginIndex',
   data () {
     return {
       // 存储表单数据的对象
       form: {
-        phone: '',
-        password: ''
+        phone: '18201288771',
+        password: '111111'
       },
       // 用于设置表单校验规则
       rules: {
@@ -60,9 +63,22 @@ export default {
       // this.$refs.form.validate(valid => {  下面用异步的方式，也可以获取结果
       // console.log(valid)  true
       try {
+        // 1.设置校验
         // 设置校验成功后的功能
         await this.$refs.form.validate()
-        console.log('通过了校验')
+        // console.log('通过了校验')
+
+        // 2.发送请求
+        request({
+          method: 'POST',
+          url: '/front/user/login',
+          // urlencoded 格式：名=值 & 名=值
+          // data: {
+          //   phone: this.form.phone,
+          //   password: this.form.password
+          // }
+          data: qs.stringify(this.form)
+        })
       } catch (err) {
         // 设置校验成功后的功能
         console.log('没有通过校验')
