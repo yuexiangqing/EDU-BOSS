@@ -1,13 +1,21 @@
 <template>
     <div class="login">
-  <el-form ref="form"
+  <el-form
+  :rules="rules"
+  ref="form"
   :model="form"
   label-width="80px"
   labelPosition="top">
-    <el-form-item label="手机号">
+    <el-form-item
+    label="手机号"
+    prop="phone"
+    >
       <el-input v-model="form.phone"></el-input>
     </el-form-item>
-    <el-form-item label="密码">
+    <el-form-item
+    label="密码"
+    prop="password"
+    >
       <el-input
       v-model="form.password"
       type="password"
@@ -28,15 +36,37 @@ export default {
   name: 'LoginIndex',
   data () {
     return {
+      // 存储表单数据的对象
       form: {
         phone: '',
         password: ''
+      },
+      // 用于设置表单校验规则
+      rules: {
+        phone: [
+          { required: true, message: '请输入手机号', trigger: 'blur' },
+          { pattern: /^1\d{10}$/, message: '请输入正确的手机号', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 6, max: 18, message: '密码长度为6到18位', trigger: 'blur' }
+        ]
       }
     }
   },
   methods: {
-    onSubmit () {
-      console.log('点击提交')
+    // 登录功能
+    async onSubmit () {
+      // this.$refs.form.validate(valid => {  下面用异步的方式，也可以获取结果
+      // console.log(valid)  true
+      try {
+        // 设置校验成功后的功能
+        await this.$refs.form.validate()
+        console.log('通过了校验')
+      } catch (err) {
+        // 设置校验成功后的功能
+        console.log('没有通过校验')
+      }
     }
   }
 }
