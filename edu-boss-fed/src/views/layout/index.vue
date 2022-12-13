@@ -5,7 +5,10 @@
     <app-aside></app-aside>
     </el-aside>
     <el-container>
-      <el-header>Header</el-header>
+      <el-header>
+        <!-- 头部组件 -->
+        <app-header></app-header>
+      </el-header>
       <el-main>
         <!-- 设置子路由的出口 -->
         <router-view></router-view>
@@ -17,10 +20,12 @@
 <script>
 // 引入侧边栏组件
 import AppAside from './components/AppAside'
+import AppHeader from './components/AppHeader'
 export default {
   name: 'VueLayout',
   components: {
-    AppAside
+    AppAside,
+    AppHeader
   }
 }
 </script>
