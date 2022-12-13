@@ -33,9 +33,11 @@
   </template>
 
 <script>
-import request from '@/utils/request'
+// import request from '@/utils/request'
 // 安装并引入 qs
-import qs from 'qs'
+// import qs from 'qs'
+// 引入封装的接口功能组件
+import { login } from '@/services/user'
 export default {
   name: 'LoginIndex',
   data () {
@@ -73,16 +75,19 @@ export default {
 
         // 2.发送请求
         this.isLoginLoading = true
-        const { data } = await request({
-          method: 'POST',
-          url: '/front/user/login',
-          // urlencoded 格式：名=值 & 名=值
-          // data: {
-          //   phone: this.form.phone,
-          //   password: this.form.password
-          // }
-          data: qs.stringify(this.form)
-        })
+        // const { data } = await request({
+        //   method: 'POST',
+        //   url: '/front/user/login',
+
+        // urlencoded 格式：名=值 & 名=值
+        // data: {
+        //   phone: this.form.phone,
+        //   password: this.form.password
+        // }
+
+        //   data: qs.stringify(this.form)
+        // })
+        const { data } = await login(this.form)
         this.isLoginLoading = false
         // 3.响应处理
         if (data.state === 1) {
