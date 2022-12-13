@@ -69,7 +69,7 @@ export default {
         // console.log('通过了校验')
 
         // 2.发送请求
-        request({
+        const { data } = await request({
           method: 'POST',
           url: '/front/user/login',
           // urlencoded 格式：名=值 & 名=值
@@ -79,6 +79,15 @@ export default {
           // }
           data: qs.stringify(this.form)
         })
+        // 3.响应处理
+        if (data.state === 1) {
+          this.$router.push({
+            name: 'home'
+          })
+          this.$message.success('登录成功')
+        } else {
+          this.$message.error('登录失败')
+        }
       } catch (err) {
         // 设置校验成功后的功能
         console.log('没有通过校验')
