@@ -68,7 +68,19 @@ export default {
       // this.$refs.form.validate(valid => {  下面用异步的方式，也可以获取结果
       // console.log(valid)  true
       // this.$store.commit('jia')
-      this.$store.commit('jia', 5)
+      // this.$store.commit('jia', 5)
+      this.$store.dispatch('jiaHandle', {
+        count: 5,
+        delay: 2000
+      })
+      this.$store.dispatch('jiaHandle', {
+        count: 2,
+        delay: 1000
+      })
+      this.$store.dispatch('jiaHandle', {
+        count: 1,
+        delay: 500
+      })
       try {
         // 1.设置校验
         // 设置校验成功后的功能
