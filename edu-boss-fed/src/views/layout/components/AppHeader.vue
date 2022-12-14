@@ -19,7 +19,12 @@
      </span>
      <el-dropdown-menu slot="dropdown">
        <el-dropdown-item>{{userInfo.userName}}</el-dropdown-item>
-       <el-dropdown-item divided>退出</el-dropdown-item>
+       <el-dropdown-item
+       divided
+       @click.native="handleLogout"
+       >退出</el-dropdown-item>
+       <!-- 注意：这里的退出并不是一个按钮，而是一个组件，在组件操作时给组件绑定的事件都是自定义事件，这里的click事件并不是原生的 DOM 事件，如果想要完成普通的原生的dom事件 -->
+      <!-- 可以给当前这个事件设置一个修饰符，可以通过.名称的方式来书写，.native表示当前的是原生事件，从而设置给根元素，就可以操作成功了 -->
      </el-dropdown-menu>
   </el-dropdown>
   </div>
@@ -45,6 +50,28 @@ export default {
     async loadUserInfo () {
       const { data } = await getUsrInfo()
       this.userInfo = data.content
+    },
+    // 退出功能
+    handleLogout () {
+      this.$confirm('确认退出吗?', '退出提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        // 1.清除 store 中的用户信息
+        this.$store.commit('setUser', null)
+        // 2.跳转到登录页
+        this.$router.push('./login')
+        this.$message({
+          type: 'success',
+          message: '退出成功!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消退出'
+        })
+      })
     }
   }
 }
