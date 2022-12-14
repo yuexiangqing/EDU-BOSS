@@ -12,13 +12,13 @@
      <span class="el-dropdown-link">
         <!-- 用户头像 -->
         <el-avatar
-        src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+        :src="userInfo.portrait || 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'"
         :size="30"
         ></el-avatar>
         <i class="el-icon-arrow-down el-icon--right"></i>
      </span>
      <el-dropdown-menu slot="dropdown">
-       <el-dropdown-item>用户信息</el-dropdown-item>
+       <el-dropdown-item>{{userInfo.userName}}</el-dropdown-item>
        <el-dropdown-item divided>退出</el-dropdown-item>
      </el-dropdown-menu>
   </el-dropdown>
@@ -26,8 +26,27 @@
 </template>
 
 <script>
+// 引入用户信息接口功能
+import { getUsrInfo } from '@/services/user'
 export default {
-  name: 'AppHeader'
+  name: 'AppHeader',
+  created () {
+    // 加载用户信息
+    this.loadUserInfo()
+  },
+  data () {
+    return {
+      // 用户信息
+      userInfo: {}
+    }
+  },
+  methods: {
+    // 加载用户信息功能
+    async loadUserInfo () {
+      const { data } = await getUsrInfo()
+      this.userInfo = data.content
+    }
+  }
 }
 </script>
 
