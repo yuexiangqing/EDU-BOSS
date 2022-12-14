@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkedu_boss_fed"]=self["webpackChunkedu_boss_fed"]||[]).push([[558],{8755:function(e,n,s){s.r(n),s.d(n,{default:function(){return f}});var u=function(){var e=this,n=e._self._c;return n("div",{staticClass:"advert"},[e._v("广告管理")])},t=[],l={name:"AvertIndex"},r=l,a=s(1001),d=(0,a.Z)(r,u,t,!1,null,null,null),f=d.exports}}]);
-//# sourceMappingURL=advert-space.06340f6a.js.map

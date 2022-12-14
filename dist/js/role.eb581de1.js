@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkedu_boss_fed"]=self["webpackChunkedu_boss_fed"]||[]).push([[647],{4195:function(e,n,s){s.r(n),s.d(n,{default:function(){return f}});var u=function(){var e=this,n=e._self._c;return n("div",{staticClass:"role"},[e._v("角色管理")])},t=[],l={name:"LoginIndex"},r=l,c=s(1001),d=(0,c.Z)(r,u,t,!1,null,"0d197c16",null),f=d.exports}}]);
-//# sourceMappingURL=role.eb581de1.js.map

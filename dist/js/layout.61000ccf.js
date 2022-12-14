@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkedu_boss_fed"]=self["webpackChunkedu_boss_fed"]||[]).push([[225],{8431:function(e,u,n){n.r(u),n.d(u,{default:function(){return o}});var s=function(){var e=this,u=e._self._c;return u("div",[u("router-view")],1)},t=[],r={name:"VueLayout"},d=r,f=n(1001),l=(0,f.Z)(d,s,t,!1,null,"54dd197d",null),o=l.exports}}]);
-//# sourceMappingURL=layout.61000ccf.js.map

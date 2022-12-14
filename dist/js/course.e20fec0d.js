@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkedu_boss_fed"]=self["webpackChunkedu_boss_fed"]||[]).push([[449],{3303:function(e,s,u){u.r(s),u.d(s,{default:function(){return a}});var n=function(){var e=this,s=e._self._c;return s("div",{staticClass:"course"},[e._v("课程管理")])},t=[],l={name:"CourseIndex"},r=l,c=u(1001),f=(0,c.Z)(r,n,t,!1,null,null,null),a=f.exports}}]);
-//# sourceMappingURL=course.e20fec0d.js.map

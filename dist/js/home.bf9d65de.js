@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkedu_boss_fed"]=self["webpackChunkedu_boss_fed"]||[]).push([[177],{7413:function(e,s,n){n.r(s),n.d(s,{default:function(){return r}});var u=function(){var e=this,s=e._self._c;return s("div",{staticClass:"home"},[e._v("首页")])},t=[],a={name:"HomeIndex"},d=a,f=n(1001),l=(0,f.Z)(d,u,t,!1,null,"d196a93a",null),r=l.exports}}]);
-//# sourceMappingURL=home.bf9d65de.js.map
