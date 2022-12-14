@@ -69,18 +69,6 @@ export default {
       // console.log(valid)  true
       // this.$store.commit('jia')
       // this.$store.commit('jia', 5)
-      this.$store.dispatch('jiaHandle', {
-        count: 5,
-        delay: 2000
-      })
-      this.$store.dispatch('jiaHandle', {
-        count: 2,
-        delay: 1000
-      })
-      this.$store.dispatch('jiaHandle', {
-        count: 1,
-        delay: 500
-      })
       try {
         // 1.设置校验
         // 设置校验成功后的功能
@@ -109,6 +97,8 @@ export default {
             name: 'home'
           })
           this.$message.success('登录成功')
+          // 将用户信息存储到 vuex 中
+          this.$store.commit('setUser', data.content)
         } else {
           this.$message.error('登录失败')
         }
