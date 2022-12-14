@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkedu_boss_fed"]=self["webpackChunkedu_boss_fed"]||[]).push([[40],{1040:function(e,n,s){s.r(n),s.d(n,{default:function(){return a}});var u=function(){var e=this,n=e._self._c;return n("div",{staticClass:"login"},[e._v("登录")])},t=[],l={name:"LoginIndex"},f=l,i=s(1001),r=(0,i.Z)(f,u,t,!1,null,"006e2736",null),a=r.exports}}]);
+//# sourceMappingURL=40.f27b6b9e.js.map

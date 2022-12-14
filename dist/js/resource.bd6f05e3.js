@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkedu_boss_fed"]=self["webpackChunkedu_boss_fed"]||[]).push([[105],{2533:function(e,s,u){u.r(s),u.d(s,{default:function(){return a}});var n=function(){var e=this,s=e._self._c;return s("div",{staticClass:"resource"},[e._v("资源管理")])},r=[],t={name:"ResourceIndex"},c=t,f=u(1001),l=(0,f.Z)(c,n,r,!1,null,"1265f664",null),a=l.exports}}]);
+//# sourceMappingURL=resource.bd6f05e3.js.map
