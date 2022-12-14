@@ -93,12 +93,15 @@ export default {
         this.isLoginLoading = false
         // 3.响应处理
         if (data.state === 1) {
-          this.$router.push({
-            name: 'home'
-          })
+          // 如果成功，直接跳转到根目录
+          // this.$router.push({
+          //   name: 'home'
+          // })
           this.$message.success('登录成功')
           // 将用户信息存储到 vuex 中
           this.$store.commit('setUser', data.content)
+          // 根据可能存在的 redirect 数据进行跳转设置($router是对象，用来进行跳转操作或者调用方法使用，$route存储的是当前路由的路由信息)
+          this.$router.push(this.$route.query.redirect || '/')
         } else {
           this.$message.error('登录失败')
         }

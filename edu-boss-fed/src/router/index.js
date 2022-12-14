@@ -76,12 +76,19 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  console.log(to)
   // 验证 to 路由是否需要进行身份验证
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // 验证 vuex 的store中的登录用户信息是否存储
     if (!store.state.user) {
       // 未登录，跳转到登录页
-      return next({ name: 'login' })
+      return next({
+        name: 'login',
+        query: {
+          // 将本次路由的 fullPath 传递给 login 页面 , redirect可以随便命名
+          redirect: to.fullPath
+        }
+      })
     }
     // 已经登录，运行通过
     next()
