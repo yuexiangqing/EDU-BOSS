@@ -6,16 +6,77 @@
           @click="$router.push({name: 'menu-create'})"
           >添加菜单</el-button>
         </div>
-        <div v-for="o in 4" :key="o" class="text item">
-          {{'列表内容 ' + o }}
-        </div>
+        <!-- 底部菜单列表展示区域 -->
+        <!-- prop表示的事绑定的 tableData 里面的哪个属性 -->
+    <el-table
+      :data="tableData"
+      style="width: 100%">
+      <el-table-column
+        label="编号"
+        type="index">
+      </el-table-column>
+      <el-table-column
+        prop="name"
+        label="菜单名称">
+      </el-table-column>
+      <el-table-column
+        prop="level"
+        label="菜单级数">
+      </el-table-column>
+      <el-table-column
+        prop="icon"
+        label="前端图标">
+      </el-table-column>
+      <el-table-column
+        prop="orderNum"
+        label="排序">
+      </el-table-column>
+      <el-table-column
+        label="操作"
+        width="180">
+        <!-- 采用作用域插槽来设置 -->
+        <template slot-scope="scope">
+        <el-button
+          size="mini"
+          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+        <el-button
+          size="mini"
+          type="danger"
+          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+      </template>
+      </el-table-column>
+    </el-table>
       </el-card>
     </div>
   </template>
 
 <script>
+import { getAllMenu } from '@/services/menu'
 export default {
-  name: 'MenuIndex'
+  name: 'MenuIndex',
+  data () {
+    return {
+      tableData: []
+    }
+  },
+  created () {
+    this.loadAllMenus()
+  },
+  methods: {
+    handleEdit () {
+
+    },
+    handleDelete () {
+
+    },
+    // 获取所有菜单信息
+    async loadAllMenus () {
+      const { data } = await getAllMenu()
+      if (data.code === '000000') {
+        this.tableData = data.data
+      }
+    }
+  }
 }
 </script>
 
