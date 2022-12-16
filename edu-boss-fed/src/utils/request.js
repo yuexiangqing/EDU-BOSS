@@ -45,6 +45,12 @@ function redirectLogin () {
     }
   })
 }
+
+// 存储是否正在更新 token 的状态
+let isRefreshing = false
+// 存储因为等待 token 刷新而挂起的请求
+let requests = []
+
 // 响应拦截器
 request.interceptors.response.use(function (response) {
   // 状态码 2xx 内的状态码都会触发该函数。
@@ -69,6 +75,16 @@ request.interceptors.response.use(function (response) {
         // 就结束
         return Promise.reject(error)
       }
+
+      // 检测是否已经存在了正在刷新 token 的请求
+      if (isRefreshing) {
+        // 将当前失败的请求存储到请求列表中
+        return requests.push(() => {
+          // 当前函数调用后会自动发送本次失败的请求
+          request(error.config)
+        })
+      }
+      isRefreshing = true
       // 2. Token 无效（错误 token,过期 token）
       // 发生请求，获取新的 access_token
       // 这里的 return 是指处理完了，就结束了
@@ -92,9 +108,18 @@ request.interceptors.response.use(function (response) {
         store.commit('setUser', res.data.content)
         // 重新发送失败的请求
         // error.config 是本次失败的请求的配置对象
+        // return request(error.config)
+        // 根据 requests 发送所有失败的请求
+        requests.forEach(callback => callback())
+        // 发送完毕，清除 requests 内容即可
+        requests = []
+        // 将本次请求发送
         return request(error.config)
       }).catch(err => {
         console.log(err)
+      }).finally(() => {
+        // 请求发送完毕，响应处理完毕，将刷新状态更改为 false 即可
+        isRefreshing = false
       })
     } else if (status === 403) {
       errorMessage = '没有权限，请联系管理员'
