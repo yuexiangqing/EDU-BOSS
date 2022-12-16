@@ -53,24 +53,41 @@
 </template>
 
 <script>
+import { getEditMenuInfo } from '@/services/menu'
 export default {
   name: 'MenuCreate',
   data () {
     return {
+      // 表单数据
       form: {
-        parentId: 1,
+        parentId: -1,
         name: '',
         href: '',
         icon: '',
         orderNum: 5,
         description: '',
         shown: true
-      }
+      },
+      // 存储上级菜单数据的
+      parentMenuList: []
     }
+  },
+  created () {
+    // 加载上级菜单信息
+    this.loadMenuInfo()
   },
   methods: {
     onSubmit () {
       console.log('submit!')
+    },
+    async loadMenuInfo () {
+      // 请求菜单数据 （上级菜单数据）
+      const { data } = await getEditMenuInfo()
+      // console.log(data)
+      if (data.code === '000000') {
+        // 将上级菜单数据保存，进行数据绑定
+        this.parentMenuList = data.data.parentMenuList
+      }
     }
   }
 }
