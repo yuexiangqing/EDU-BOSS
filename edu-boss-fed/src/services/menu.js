@@ -28,3 +28,12 @@ export const getAllMenu = () => {
     url: '/boss/menu/getAll'
   })
 }
+
+// 删除菜单接口
+export const deleteMenu = id => {
+  return request({
+    method: 'DELETE',
+    // url: '/boss/menu/{id}'
+    url: `/boss/menu/${id}`
+  })
+}

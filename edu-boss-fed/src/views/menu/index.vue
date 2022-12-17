@@ -42,7 +42,7 @@
         <el-button
           size="mini"
           type="danger"
-          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          @click="handleDelete(scope.row)">删除</el-button>
       </template>
       </el-table-column>
     </el-table>
@@ -51,7 +51,7 @@
   </template>
 
 <script>
-import { getAllMenu } from '@/services/menu'
+import { getAllMenu, deleteMenu } from '@/services/menu'
 export default {
   name: 'MenuIndex',
   data () {
@@ -66,8 +66,23 @@ export default {
     handleEdit () {
 
     },
-    handleDelete () {
-
+    handleDelete (rowData) {
+      // 删除的确认提示
+      this.$confirm('确认删除吗?', '删除提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        // 发送删除请求
+        const { data } = await deleteMenu(rowData.id)
+        if (data.code === '000000') {
+          this.$message.success('删除成功')
+          // 更新数据列表
+          this.loadAllMenus()
+        }
+      }).catch(() => {
+        this.$message.info('已取消删除')
+      })
     },
     // 获取所有菜单信息
     async loadAllMenus () {
