@@ -1,20 +1,20 @@
 <template>
-  <div class="menu-create">
-    <!-- 将添加功能封装到单独组件 ./components/createoredit -->
-    <create-or-edit></create-or-edit>
+  <div class="menu-edit">
+    <!-- 引入并通过 isEdit -->
+    <create-or-edit :isEdit="true"></create-or-edit>
   </div>
 </template>
 
 <script>
 import CreateOrEdit from './components/CreateOrEdit'
 export default {
-  name: 'MenuCreate',
+  name: 'MenuEdit',
   components: {
     CreateOrEdit
   }
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 
 </style>
