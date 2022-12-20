@@ -9,7 +9,7 @@
             <el-input v-model="form.name"></el-input>
           </el-form-item>
           <el-form-item label="菜单路径">
-            <el-input v-model="form.path"></el-input>
+            <el-input v-model="form.href"></el-input>
           </el-form-item>
           <el-form-item label="上级菜单">
             <el-select v-model="form.parentId" placeholder="请选择上级菜单">
@@ -45,7 +45,7 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">提交</el-button>
-            <el-button>重置</el-button>
+            <el-button v-if="!isEdit">重置</el-button>
           </el-form-item>
         </el-form>
       </el-card>
@@ -94,12 +94,18 @@ export default {
       }
     },
     async loadMenuInfo () {
+      // 检测是否存在路由参数 id 并进行对应处理
+      const id = this.$route.params.id || -1
       // 请求菜单数据 （上级菜单数据）
-      const { data } = await getEditMenuInfo()
+      const { data } = await getEditMenuInfo(id)
       // console.log(data)
       if (data.code === '000000') {
         // 将上级菜单数据保存，进行数据绑定
         this.parentMenuList = data.data.parentMenuList
+        // 检测是否存在菜单数据 menuInfo,如果存在要更新给 form
+        if (data.data.menuInfo) {
+          this.form = data.data.menuInfo
+        }
       }
     }
   }
