@@ -3,15 +3,21 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <!-- 使用 Form 组件：行内表单 -->
-        <el-form :inline="true" :model="form" class="demo-form-inline">
-          <el-form-item label="资源名称">
-            <el-input v-model="form.name" placeholder="资源名称"></el-input>
+        <el-form :inline="true" :model="form" ref="form" class="demo-form-inline">
+          <el-form-item label="资源名称" prop="name">
+            <el-input
+            clearable
+            v-model="form.name" placeholder="资源名称"></el-input>
           </el-form-item>
-          <el-form-item label="路径">
-            <el-input v-model="form.url" placeholder="路径"></el-input>
+          <el-form-item label="资源路径" prop="url">
+            <el-input
+            clearable
+            v-model="form.url" placeholder="资源路径"></el-input>
           </el-form-item>
-          <el-form-item label="资源分类">
-            <el-select v-model="form.categoryId" placeholder="资源分类">
+          <el-form-item label="资源分类" prop="categoryId">
+            <el-select
+            clearable
+            v-model="form.categoryId" placeholder="资源分类">
               <!-- 请求接口进行下拉菜单项设置 -->
               <el-option
               v-for="item in resourceCategories"
@@ -22,6 +28,10 @@
             </el-select>
           </el-form-item>
           <el-form-item>
+            <el-button
+            @click="onReset"
+            >重置
+            </el-button>
             <el-button
             @click="onSubmit"
             type="primary">查询</el-button>
@@ -112,6 +122,10 @@ export default {
     this.loadResourceCategories()
   },
   methods: {
+    // 重置按钮点击操作
+    onReset () {
+      this.$refs.form.resetFields()
+    },
     // 提交筛选功能
     onSubmit () {
     // 请求数据前，将请求的页数更新为 1
