@@ -37,3 +37,11 @@ export const deleteMenu = id => {
     url: `/boss/menu/${id}`
   })
 }
+
+// 获取所有菜单并按照层级展示
+export const getMenuNodeList = () => {
+  return request({
+    method: 'GET',
+    url: '/boss/menu/getMenuNodeList'
+  })
+}
