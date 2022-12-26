@@ -4,17 +4,26 @@
     <!-- 这是角色ID 为: {{ roleId }} -->
     <el-card>
         <el-tree
+        ref="menu-tree"
+        node-key="id"
         :data="menus"
         :props="defaultProps"
         show-checkbox
         default-expand-all
         ></el-tree>
+        <div style="margin=20px;">
+                <el-button>清空</el-button>
+                <el-button
+                type="primary"
+                @click="onSave"
+                >保存</el-button>
+            </div>
     </el-card>
   </div>
 </template>
 
 <script>
-import { getMenuNodeList } from '@/services/menu'
+import { getMenuNodeList, allocateRoleMenus } from '@/services/menu'
 export default {
   name: 'AllocMenu',
   props: {
@@ -36,6 +45,19 @@ export default {
     }
   },
   methods: {
+    async onSave () {
+    // 发送请求，传递角色ID 与选中的菜单项 ID
+      const { data } = await allocateRoleMenus({
+        roleId: this.roleId,
+        menuIdList: this.$refs['menu-tree'].getCheckedKeys()
+      })
+      if (data.code === '000000') {
+        this.$message.success('分配菜单成功')
+        this.$router.push({
+          name: 'role'
+        })
+      }
+    },
     async loadMenus () {
       const { data } = await getMenuNodeList()
       if (data.code === '000000') {

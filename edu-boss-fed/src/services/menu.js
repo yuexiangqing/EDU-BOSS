@@ -45,3 +45,12 @@ export const getMenuNodeList = () => {
     url: '/boss/menu/getMenuNodeList'
   })
 }
+
+// 给角色分配菜单
+export const allocateRoleMenus = data => {
+  return request({
+    method: 'POST',
+    url: '/boss/menu/allocateRoleMenus',
+    data
+  })
+}
