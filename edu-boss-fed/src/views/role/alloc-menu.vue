@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { getMenuNodeList, allocateRoleMenus } from '@/services/menu'
+import { getMenuNodeList, allocateRoleMenus, getRoleMenus } from '@/services/menu'
 export default {
   name: 'AllocMenu',
   props: {
@@ -33,7 +33,10 @@ export default {
     }
   },
   created () {
+    // 加载所有的菜单信息（用于展示 tree 结构）
     this.loadMenus()
+    // 加载当前角色已经分配的菜单信息
+    this.loadRoleMenus()
   },
   data () {
     return {
@@ -45,6 +48,10 @@ export default {
     }
   },
   methods: {
+    async loadRoleMenus () {
+      const { data } = await getRoleMenus(this.roleId)
+      console.log(data)
+    },
     async onSave () {
     // 发送请求，传递角色ID 与选中的菜单项 ID
       const { data } = await allocateRoleMenus({
